@@ -1,9 +1,7 @@
 package com.example.sandeth_oblig2.viewmodels
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -19,7 +17,7 @@ import kotlinx.coroutines.launch
 class AlpacaViewModel : ViewModel() {
 
     private val dataSource = DataSource(
-        "https://www.uio.no/studier/emner/matnat/ifi/IN2000/v23/obligatoriske-oppgaver/alpacaparties.json",
+        "https://in2000-proxy.ifi.uio.no/alpacaapi/alpacaparties",
         "https://in2000-proxy.ifi.uio.no/alpacaapi/district1",
         "https://in2000-proxy.ifi.uio.no/alpacaapi/district2",
         "https://in2000-proxy.ifi.uio.no/alpacaapi/district3"
@@ -48,17 +46,16 @@ class AlpacaViewModel : ViewModel() {
 
     private suspend fun loadResults(parties: Map<Int, AlpacaParty>): List<District> {
 
-        val dis1 = dataSource.fetchDistrict12(dataSource.district1, parties, "Distrikt 1")
-        val dis2 = dataSource.fetchDistrict12(dataSource.district2, parties, "Distrikt 2")
-        val dis3 = dataSource.fetchDistrict3(dataSource.district3, parties, "Distrikt 3")
+        val dis1 = dataSource.fetchDistrictJSON(dataSource.district1, parties, "Distrikt 1")
+        val dis2 = dataSource.fetchDistrictJSON(dataSource.district2, parties, "Distrikt 2")
+        val dis3 = dataSource.fetchDistrictXML(dataSource.district3, parties, "Distrikt 3")
 
         return listOf(dis1, dis2, dis3)
     }
 
 
-    public fun changeSelectedDistrict(district: District) {
+    fun changeSelectedDistrict(district: District) {
         _alpacaUiState.value = alpacaUiState.value.copy(currentDistrict = district)
-        Log.d("selectedDistrictSJEKK", selectedDistrict!!.text)
     }
 
 

@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">sandeth_oblig2</string>
+    <string name="DDLText">Velg distrikt…</string>
+    <string name="pictureDescription">Partileder</string>
+
+    <string-array name="DistriktListe">
+        <item>Distrikt 1</item>
+        <item>Distrikt 2</item>
+        <item>Distrikt 3</item>
+    </string-array>
 </resources>

@@ -5,7 +5,6 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.ElevatedCard
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -13,15 +12,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.toColorInt
 import coil.compose.AsyncImage
+import com.example.sandeth_oblig2.R
 import com.example.sandeth_oblig2.model.AlpacaParty
 import com.example.sandeth_oblig2.model.District
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PartyCard(partyData: AlpacaParty, district: District) {
 
@@ -56,7 +56,7 @@ fun PartyCard(partyData: AlpacaParty, district: District) {
 
             AsyncImage(
                 model = partyData.img,
-                contentDescription = "partileder",
+                contentDescription = stringResource(R.string.pictureDescription),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(150.dp)
@@ -72,7 +72,7 @@ fun PartyCard(partyData: AlpacaParty, district: District) {
             )
 
             Text(
-                text = "Stemmer: ${(district.results[partyData])} \nProsent: ${ roundedPercentage }",
+                text = "Stemmer: ${(district.results[partyData])} \nProsent: $roundedPercentage",
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(bottom = 20.dp)
             )
